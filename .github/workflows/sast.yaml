@@ -22,7 +22,7 @@ jobs:
 
     - name: Clone libtins
       run: |
-        git clone github.com/mfontanini/libtins vendor/libtins
+        git clone https://github.com/mfontanini/libtins vendor/libtins
             
 
     - name: Setup OpenSSL
