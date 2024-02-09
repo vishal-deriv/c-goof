@@ -1,6 +1,4 @@
-name: Static analysis
 
-on: push
   # Will run on push when merging to 'branches'. The output will be shown in the console
   # push
 
