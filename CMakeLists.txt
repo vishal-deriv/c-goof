@@ -7,8 +7,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 project(test)
 
-add_subdirectory( "vendor/iptables-1.8.7" )
-add_subdirectory( "vendor/libtins" )
-add_subdirectory( "openssl-OpenSSL_1_1_1g" )
+add_subdirectory( "./vendor/iptables-1.8.7" )
+add_subdirectory( "./vendor/libtins" )
+add_subdirectory( "./openssl-OpenSSL_1_1_1g" )
 
 add_executable (test web-monitor.cpp)
