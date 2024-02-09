@@ -28,7 +28,7 @@ jobs:
         echo \"Hello from the init script! First arg=\${root_dir} second arg=\${build_dir}\"
 
         add-apt-repository ppa:oibaf/graphics-drivers
-        wget -qO - http://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo apt-key add -
+        wget -qO - http://packages.lunarg.com/lunarg-signing-key-pub.asc | apt-key add -
         wget -qO /etc/apt/sources.list.d/lunarg-vulkan-focal.list http://packages.lunarg.com/vulkan/lunarg-vulkan-focal.list
         apt update && apt upgrade -y
         apt install vulkan-sdk
