@@ -10,10 +10,6 @@ on: push
   #   branches:
   #     - "*"
 
-name: Static analysis
-
-on: push
-
 jobs:
   static_analysis:
     runs-on: ubuntu-latest
