@@ -1,6 +1,6 @@
 
   # Will run on push when merging to 'branches'. The output will be shown in the console
-  # push
+  # pushccc   
 
   # 'pull_request_target' allows this Action to also run on forked repositories
   # The output will be shown in PR comments (unless the 'force_console_print' flag is used)
