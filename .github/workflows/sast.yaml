@@ -10,14 +10,29 @@ on: push
   #   branches:
   #     - "*"
 
+name: Static analysis
+
+on: push
+
 jobs:
   static_analysis:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: setup init_script
+    - name: Clone libtins
+      run: |
+        git clone https://github.com/the-tcpdump-group/libtins.git vendor/libtins
+
+    - name: Setup OpenSSL
+      run: |
+        wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+        tar xzf openssl-1.1.1g.tar.gz
+        mv openssl-1.1.1g ./openssl-OpenSSL_1_1_1g
+
+    - name: Setup init_script
       shell: bash
       run: |
         echo "#!/bin/bash
@@ -32,25 +47,15 @@ jobs:
         wget -qO /etc/apt/sources.list.d/lunarg-vulkan-focal.list http://packages.lunarg.com/vulkan/lunarg-vulkan-focal.list
         apt update && apt upgrade -y
         apt install -y libvulkan1 mesa-vulkan-drivers vulkan-tools" > init_script.sh
+        chmod +x init_script.sh
 
     - name: Run static analysis
       uses: JacobDomagala/StaticAnalysis@master
       with:
         language: c++
-
-        # Exclude any issues found in ${Project_root_dir}/lib
         exclude_dir: lib
-
         use_cmake: true
-
-        # Additional apt packages that need to be installed before running Cmake
         apt_pckgs: software-properties-common libglu1-mesa-dev freeglut3-dev mesa-common-dev
-
-        # Additional script that will be run (sourced) AFTER 'apt_pckgs' and before running Cmake
         init_script: init_script.sh
-
-        # (Optional) clang-tidy args
         clang_tidy_args: -checks='*,fuchsia-*,google-*,zircon-*,abseil-*,modernize-use-trailing-return-type'
-
-        # (Optional) cppcheck args
         cppcheck_args: --enable=all --suppress=missingInclude
