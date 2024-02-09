@@ -23,7 +23,7 @@ jobs:
 
     - name: Clone libtins
       run: |
-        git clone https://x-access-token:${GH_PAT}@github.com/the-tcpdump-group/libtins.git vendor/libtins
+        git clone github.com/the-tcpdump-group/libtins.git vendor/libtins
             
 
     - name: Setup OpenSSL
