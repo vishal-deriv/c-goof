@@ -11,8 +11,7 @@
 name: Static analysis
 
 on: push
-env:
-    GH_PAT: ${{ secrets.GH_PAT }}
+
 jobs:
   static_analysis:
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
 
     - name: Clone libtins
       run: |
-        git clone github.com/the-tcpdump-group/libtins.git vendor/libtins
+        git clone github.com/mfontanini/libtins vendor/libtins
             
 
     - name: Setup OpenSSL
